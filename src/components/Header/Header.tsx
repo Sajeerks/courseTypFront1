@@ -90,6 +90,12 @@ export default function PrimarySearchAppBar({setdarkTheme, darkThemer}:PrimarySe
     handleMobileMenuClose();
   };
 
+  const handleLoginClick = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    navigate("/login")
+  };
+
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -115,7 +121,7 @@ const navigate = useNavigate()
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleLoginClick}>Login</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );

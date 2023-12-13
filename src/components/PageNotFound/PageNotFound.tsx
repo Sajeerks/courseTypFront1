@@ -11,7 +11,7 @@ const PageNotFound = () => {
 
         </Box>
         <Box>
-        <Button sx={{width:"50vw"}} variant="contained">  <Link to='/'>Go to Home</Link></Button>
+ <Link to='/'>         <Button sx={{width:"50vw"}} variant="contained"> Go to Home</Button></Link>
 
         </Box>
     </StyledBoxForWholePage>

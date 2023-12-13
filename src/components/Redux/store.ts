@@ -1,11 +1,12 @@
 import  {configureStore} from '@reduxjs/toolkit'
+import  getUserSlice from './userReducer'
 
 
 
 
 const store = configureStore({
     reducer:{
-     
+     user:getUserSlice
     }
 })
 

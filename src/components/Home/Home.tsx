@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from "@mui/material"
 import "./Home.css"
 import { styled } from '@mui/material/styles';
+import { toast } from "react-toastify";
 
 const StyledBox = styled(Box)({
 
@@ -36,6 +37,7 @@ const StyledBox = styled(Box)({
 
 const Home = () => {
 
+  
  
 
   return (
