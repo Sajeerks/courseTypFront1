@@ -54,7 +54,7 @@ export default function TemporaryDrawer({openDrawer,setopenDrawer}:TemporaryDraw
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['product/createProduct', 'product/productList', 'allUsersList', 'allProducts'].map((text, index) => (
+        {['course/createcourse', 'product/productList', 'allUsersList', 'allProducts'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={()=>navigate(`/${text}`)}>
               {/* <Link to={`/product/${text}`}  > */}
@@ -62,20 +62,20 @@ export default function TemporaryDrawer({openDrawer,setopenDrawer}:TemporaryDraw
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               {/* </Link> */}
-              <ListItemText primary={text.replace("product/", "")} />
+              <ListItemText primary={text.replace("course/", "")} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['orders/allorders'].map((text, index) => (
+        {['orders/allorders', "payment/subscribe"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={()=>navigate(`/${text}`)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text.replace("orders/","")} />
+              <ListItemText primary={text.replace("orders/","").replace("payment/", "")} />
             </ListItemButton>
           </ListItem>
         ))}

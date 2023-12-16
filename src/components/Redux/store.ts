@@ -1,12 +1,18 @@
 import  {configureStore} from '@reduxjs/toolkit'
 import  getUserSlice from './userReducer'
+import  getAllCourses from './courseReducer'
+import  singleCourse  from './singleCourseReducer'
+import paymentReducer from './paymentReducer'
 
 
 
 
 const store = configureStore({
     reducer:{
-     user:getUserSlice
+     user:getUserSlice,
+     courses:getAllCourses,
+     singleCourse:singleCourse,
+     paymentReducer:paymentReducer,
     }
 })
 

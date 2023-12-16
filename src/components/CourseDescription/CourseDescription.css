@@ -1,0 +1,29 @@
+.CourseDescription_main{
+    /* height: auto; */
+    position: relative;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+
+}
+
+.lectureCard{
+     width: 50vw;
+     height: auto;
+     background: rgb(227, 214, 214);
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5vmax;
+
+
+}
+
+.video_in_course_description{
+    width: 40vw;
+}

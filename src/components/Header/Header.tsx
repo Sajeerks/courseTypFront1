@@ -20,6 +20,11 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import TemporaryDrawer from './Drawer';
 import { Link, useNavigate } from 'react-router-dom';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../Redux/store';
+import { logoutUser } from '../Redux/userReducer';
+import { toast } from 'react-toastify';
+import { Avatar } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -96,6 +101,13 @@ export default function PrimarySearchAppBar({setdarkTheme, darkThemer}:PrimarySe
     navigate("/login")
   };
 
+  const handelLogout =()=>{
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    dispatch(logoutUser())
+    
+  }
+
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -103,6 +115,13 @@ export default function PrimarySearchAppBar({setdarkTheme, darkThemer}:PrimarySe
 //   console.log({anchorEl});
 //////////////////////////////////
 const navigate = useNavigate()
+const dispatch = useDispatch<AppDispatch>()
+const {user, message:userMessage} = useSelector((state:RootState)=>state.user)
+
+React.useEffect(() => {
+  toast.success(userMessage)
+}, [userMessage])
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -121,7 +140,7 @@ const navigate = useNavigate()
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleLoginClick}>Login</MenuItem>
+    {user?.name?<MenuItem onClick={handelLogout}>Logout </MenuItem>:<MenuItem onClick={handleLoginClick}>Login </MenuItem>}  
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -171,7 +190,8 @@ const navigate = useNavigate()
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          
+          {user?.name? <Avatar src={user.avatar.url}/>:<AccountCircle />}
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -253,7 +273,9 @@ const navigate = useNavigate()
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              {/* <AccountCircle /> */}
+          {user?.name? <Avatar src={user.avatar.url}/>:<AccountCircle />}
+
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

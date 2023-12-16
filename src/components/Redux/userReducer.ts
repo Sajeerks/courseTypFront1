@@ -27,7 +27,7 @@ export const loginUser = createAsyncThunk(  "user/loginUser",  async (loginDetai
         
         });
   //  console.log( "data.user==",data.user)
-  console.log("data",data);
+  // console.log("data",data);
         return data;
       } catch (error:any) {
         // return error as Error
@@ -37,6 +37,72 @@ export const loginUser = createAsyncThunk(  "user/loginUser",  async (loginDetai
       }
     }
   );
+
+
+
+  export const getLoggedInUserDetailsFrontend = createAsyncThunk(  "user/getLoggedInUserDetailsFrontend",  async (_, thunkApi) => {
+    try {
+     
+
+      const { data } = await axios.get(   `${server}/api/v1/me`,{
+          headers:{
+            // 'Access-Control-Allow-Origin': '*', 
+            'Content-type': 'application/json',
+            
+        },
+         withCredentials:true,
+      
+      });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+
+
+
+
+  export const logoutUser = createAsyncThunk(  "user/logoutUser",  async (_, thunkApi) => {
+    try {
+     
+  
+      const { data } = await axios.get(   `${server}/api/v1/logout`,{
+          headers:{
+            // 'Access-Control-Allow-Origin': '*', 
+            'Content-type': 'application/json',
+            
+        },
+         withCredentials:true,
+      
+      });
+//  console.log( "data.user==",data.user)
+console.log("data",data);
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+
+
+
+
+
+
+
 
 
   
@@ -98,6 +164,38 @@ export const getUserSlice = createSlice({
           state.message = null
         })
         .addCase(loginUser.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+        })  
+        .addCase(logoutUser.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(logoutUser.fulfilled, (state, action:any) => {
+          state.loading = false;
+          state.user = null ;
+          state.message = "logout successfull"
+        })
+        .addCase(logoutUser.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "logout failed" 
+        })  
+        .addCase(getLoggedInUserDetailsFrontend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(getLoggedInUserDetailsFrontend.fulfilled, (state, action:any) => {
+          state.loading = false;
+          state.user = action.payload.user ;
+          state.message = null
+        })
+        .addCase(getLoggedInUserDetailsFrontend.rejected, (state, action:any) => {
           console.log("action==",action);
           state.loading = false;
           state.error = action.error.message || 'Something went wrong';

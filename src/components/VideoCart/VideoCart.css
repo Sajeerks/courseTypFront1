@@ -1,0 +1,57 @@
+.videoCart{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
+
+    max-width: 30vw;
+    max-height: 30vh;
+    margin: 5vmax;
+    padding: 10px;
+    /* padding: 5vmax; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+   border-radius: 20px;
+   cursor: pointer;
+   /* background: blue; */
+   
+   /* overflow: hidden; */
+}
+
+.videoCart:hover{
+    transform: translateY(-5px);
+    transition: all 0.5s;
+    
+}
+
+.video_description{
+    white-space: nowrap;
+    mask-image: linear-gradient(180deg , #000 50% ,transparent);
+     max-height: 3vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+
+}
+
+.course_title{
+    white-space: nowrap;
+    max-height: 5vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.videoCart_details{
+    width: 70%;
+}
+
+@media screen and (max-width:600px){
+
+    .videoCart{
+        max-width: 90vw;
+    }
+
+}
