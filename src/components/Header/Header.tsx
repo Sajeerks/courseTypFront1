@@ -95,6 +95,14 @@ export default function PrimarySearchAppBar({setdarkTheme, darkThemer}:PrimarySe
     handleMobileMenuClose();
   };
 
+  const handleMyaccountClicked = () => {
+    navigate("/account")
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+
+
   const handleLoginClick = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
@@ -105,6 +113,7 @@ export default function PrimarySearchAppBar({setdarkTheme, darkThemer}:PrimarySe
     setAnchorEl(null);
     handleMobileMenuClose();
     dispatch(logoutUser())
+    navigate("/login")
     
   }
 
@@ -141,7 +150,7 @@ React.useEffect(() => {
       onClose={handleMenuClose}
     >
     {user?.name?<MenuItem onClick={handelLogout}>Logout </MenuItem>:<MenuItem onClick={handleLoginClick}>Login </MenuItem>}  
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMyaccountClicked}>My account</MenuItem>
     </Menu>
   );
 

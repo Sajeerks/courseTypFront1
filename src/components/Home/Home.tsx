@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/store";
 import VideoCart, { CousseModelTypeFrontend } from "../VideoCart/VideoCart";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getAllCoursesFrontend } from "../Redux/courseReducer";
+import ReactPaginate from 'react-paginate';
+import { Loading } from "../Loading/Loading";
 
 const StyledBox = styled(Box)({
 
@@ -47,8 +49,21 @@ const Home = () => {
    
   const {loading, courses, error, message , filteredCoursesCount} = useSelector((state:RootState)=>state.courses)
 
+  const [pageNumber, setpageNumber] = useState(0)
+
+
+  const itemperPage = 2 
+  const pageCount = Math.ceil(filteredCoursesCount/ itemperPage)
+  const handlePageClick = (event:any ) => {
+   // console.log("evnt in hadleclick", event);
+   // console.log("evenet selected", event.selected);
+   setpageNumber(event.selected as number)
+   // setItemOffset();
+ };
+
+
    useEffect(() => {
-  dispatch(getAllCoursesFrontend())
+  dispatch(getAllCoursesFrontend({pageNumber:pageNumber}))
    }, [])
    
    useEffect(() => {
@@ -58,12 +73,17 @@ const Home = () => {
     }
 
    }, [loading])
-   
-  
- 
+useEffect(() => {
+  dispatch(getAllCoursesFrontend({pageNumber:pageNumber+1}))  
+}, [pageNumber, pageCount])
+
+// console.log({pageNumber});
+
  
 
   return (
+ <Fragment>
+    {loading ?(<Loading/>):(  
     <StyledBoxForWholePage >
         <Typography variant="h5" sx={{marginTop:"21max"}}>COURSE BUNDLER</Typography>
       <Box>
@@ -76,11 +96,26 @@ const Home = () => {
       </Box>
 
 
-        
-    
+      {    filteredCoursesCount &&     <div className='allProducts_Main_div_pagination'>
+        <ReactPaginate
+        className='AllProductsPagination'
+        breakLabel="..."
+        nextLabel=">"
+        onPageChange={handlePageClick}
+        // pageRangeDisplayed={10}
+        pageCount={pageCount}
+        previousLabel="<"
+        renderOnZeroPageCount={null}
+        forcePage={pageNumber}
+      /> 
+
+</div>}
+
 
 
     </StyledBoxForWholePage>
+    )}
+     </Fragment>
   )
 }
 

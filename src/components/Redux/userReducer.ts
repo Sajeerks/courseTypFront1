@@ -101,13 +101,76 @@ console.log("data",data);
 
 
 
+// interface ChangePassworType{
+//   newPassword:string,
+//   oldPassword:string
+// }
+// {email:loginDetails.email,password:loginDetails.password}
+export const chagePasswordFrontend = createAsyncThunk(  "user/chagePasswordFrontend",  async (myForm:FormData, thunkApi) => {
+    try {
+     
+  // console.log({loginDetails})
+      const { data } = await axios.put(   `${server}/api/v1/changepassword`,myForm,{
+          headers:{
+            // 'Access-Control-Allow-Origin': '*', 
+            'Content-type': 'application/json',
+            
+        },
+         withCredentials:true,
+      
+      });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+
+
+export const changeUserDetailsFrontend = createAsyncThunk(  "user/changeUserDetailsFrontend",  async (myForm:FormData, thunkApi) => {
+  try {
+    for (var pair of myForm.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
+
+    const { data } = await axios.put(   `${server}/api/v1/updateprofile`,myForm,{
+        headers:{
+          // 'Access-Control-Allow-Origin': '*', 
+          // 'Content-type': 'application/json',
+          'Content-type': "multipart/form-data",
+          
+      },
+       withCredentials:true,
+    
+    });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+    return data;
+  } catch (error:any) {
+    // return error as Error
+    console.log(error)
+
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+}
+);
+
+
+
 
 
 
 
   
   export interface userTypeInFrontEnd {
-    _id: string;
+    _id?: string;
     name: string;
     email: string;
     password: string;
@@ -117,6 +180,7 @@ console.log("data",data);
       public_id: string;
       url: string;
     }
+    createdAt?:string 
     
   }
   
@@ -202,15 +266,50 @@ export const getUserSlice = createSlice({
           state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
         })  
        
-      
+        .addCase(changeUserDetailsFrontend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(changeUserDetailsFrontend.fulfilled, (state, action:any) => {
+          state.loading = false;
+          state.user = action.payload.user ;
+          state.message = "userdetails changed successfully"
+        })
+        .addCase(changeUserDetailsFrontend.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+        })  
+       
         
 
         
       
         
 
+
+        .addCase(chagePasswordFrontend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(chagePasswordFrontend.fulfilled, (state, action:any) => {
+          state.loading = false;
+          state.user = action.payload.user ;
+          state.message = "password changed successfully"
+        })
+        .addCase(chagePasswordFrontend.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+        })  
+       
         
         
+                
 
         
 

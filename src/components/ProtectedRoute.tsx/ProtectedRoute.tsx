@@ -14,6 +14,9 @@ const ProtectedRoute = ({ isAdmin=false, user}:ProtectedRoutePropsType) => {
     // const {user} = useSelector((state:RootState)=>state.user)
 
         // console.log("user in protecedROute" , user); 
+        // if(!user ){
+        //     return <Navigate  to="/login" />
+        // }
     
     if(!user || !user.name){
         return <Navigate  to="/login" />

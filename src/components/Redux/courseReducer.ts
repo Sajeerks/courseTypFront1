@@ -8,13 +8,15 @@ import { RootState } from './store';
 import { CousseModelTypeFrontend } from '../VideoCart/VideoCart';
 
 
+interface getAllcourseFrontendProps{
+  pageNumber:number
+}
 
-
-export const getAllCoursesFrontend = createAsyncThunk(  "courses/getAllCoursesFrontend",  async (_, thunkApi) => {
+export const getAllCoursesFrontend = createAsyncThunk(  "courses/getAllCoursesFrontend",  async ({pageNumber=1}:getAllcourseFrontendProps, thunkApi) => {
       try {
        
   
-        const { data } = await axios.get(   `${server}/api/v1/allcourses`,{
+        const { data } = await axios.get(   `${server}/api/v1/allcourses?page=${pageNumber}`,{
             headers:{
               // 'Access-Control-Allow-Origin': '*', 
               'Content-type': 'application/json',

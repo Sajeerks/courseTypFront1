@@ -12,11 +12,12 @@ import CourseDescription from './components/CourseDescription/CourseDescription'
 import Subscribe from './components/Payments/Subscribe';
 import PaymentFail from './components/Payments/PaymentFail';
 import PaymentSuccess from './components/Payments/PaymentSuccess';
-import { getLoggedInUserDetailsFrontend, userTypeInFrontEnd } from './components/Redux/userReducer';
+import { getLoggedInUserDetailsFrontend, loginUser, userTypeInFrontEnd } from './components/Redux/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './components/Redux/store';
 import ProtectedRoute from './components/ProtectedRoute.tsx/ProtectedRoute';
 import CreateCourse from './components/CreateCourse/CreateCourse';
+import MyAccount from './components/MyAccount/MyAccount';
 // import { Loading } from './components/Loading/Loading';
 
 
@@ -60,11 +61,13 @@ useEffect(() => {
 
 
    useEffect(() => {
-    if(user){
+   
       setlogedInUser(user)
 
-    }
+    
    }, [loading])
+
+ console.log("logged in user in state app", logedInUser);
    
   return (
      
@@ -86,6 +89,10 @@ useEffect(() => {
        
               <Route path='/paymentFailed' element={<PaymentFail/>} />
               <Route path='/PaymentSuccess' element={<PaymentSuccess/>} />
+              <Route path="/account" element={<ProtectedRoute  user = {logedInUser} isAdmin={false}/>} >
+              
+                   <Route index element={<MyAccount user={logedInUser}/>} />
+              </Route>
 
               <Route path="/payment" element={<ProtectedRoute  user = {logedInUser} isAdmin={false}/>} >
               

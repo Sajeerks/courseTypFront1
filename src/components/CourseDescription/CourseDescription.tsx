@@ -56,7 +56,7 @@ const CourseDescription = () => {
 
         <h3>Letures for the course -{courseId}</h3>
 
-        { lecturesState && lecturesState.map((singleLecture, index)=>{
+        {( lecturesState && lecturesState?.length>=1 ) ? lecturesState.map((singleLecture, index)=>{
             return (
                   <div key={singleLecture._id} className="lectureCard">
                     
@@ -76,7 +76,7 @@ const CourseDescription = () => {
                        
                      </div>
             )
-        })}
+        }  ):(<Typography>no lectures to view</Typography>)}
          
 
 

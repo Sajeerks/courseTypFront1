@@ -1,0 +1,54 @@
+.myAccount_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: 90vh;
+flex-direction: column;
+
+}
+
+.myAccount_image img{
+    width: 30vw;
+    margin: 1vmax;
+    
+}
+
+.accountbuttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+flex-direction: row;
+margin: 1vmax;
+
+}
+
+.changePassword_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    /* min-height: 90vh; */
+flex-direction: column;
+margin-bottom: 1vmax;
+}
+
+.changeUserDetails_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    /* min-height: 90vh; */
+flex-direction: column;
+margin-bottom: 1vmax;
+gap:1vmax;
+}
+
+.PRev_image_account{
+    width: 300px;
+    margin-inline: auto;
+    margin-block: 1vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
