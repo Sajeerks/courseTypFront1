@@ -68,6 +68,38 @@ export const getSingleCourseFrontend = createAsyncThunk(  "singleCourse/getSingl
 );
 
 
+// export const getAllCoursesFrontend = createAsyncThunk(  "singleCourse/getAllCoursesFrontend",  async (_, thunkApi) => {
+//   try {
+   
+
+//     const { data } = await axios.get(   `${server}/api/v1/allcourses`,{
+//         headers:{
+//           // 'Access-Control-Allow-Origin': '*', 
+//           'Content-type': 'application/json',
+          
+//       },
+//        withCredentials:true,
+    
+//     });
+// //  console.log( "data.user==",data.user)
+// // console.log("data",data);
+//     return data;
+//   } catch (error:any) {
+//     // return error as Error
+//     console.log(error)
+
+//     return thunkApi.rejectWithValue(error.response.data);
+//   }
+// }
+// );
+
+
+
+
+
+
+
+
 
 
 
@@ -93,7 +125,8 @@ export const getSingleCourseFrontend = createAsyncThunk(  "singleCourse/getSingl
     error: string | null;
     message:string |null
     lectures: OnlyLectureType[] | null
-   
+    // allcourses:CousseModelTypeFrontend[]| null 
+    // filteredCoursesCount:number
  
   }
   const initialState: initalStateForAllcourses = {
@@ -102,7 +135,8 @@ export const getSingleCourseFrontend = createAsyncThunk(  "singleCourse/getSingl
     error: null,
     message:null,
     lectures:null,
- 
+    // allcourses:null,
+    // filteredCoursesCount:0
   };
   
 
@@ -132,7 +166,7 @@ export const singleCourse = createSlice({
         })
         .addCase(getSingleCourseFrontend.fulfilled, (state, action:any) => {
           state.loading = false;
-          state.lectures = action.payload.lectures ;
+          state.lectures = action.payload. lectures;
           
 
           state.message = null
@@ -163,6 +197,28 @@ export const singleCourse = createSlice({
      
         
       
+       
+        // .addCase(getAllCoursesFrontend.pending, (state) => {
+        //   state.loading = true;
+        //   state.error = null;
+        //   state.message = null
+        // })
+        // .addCase(getAllCoursesFrontend.fulfilled, (state, action:any) => {
+        //   state.loading = false;
+        //   state.allcourses = action.payload.allCourses ;
+        //   state.filteredCoursesCount = action.payload.filteredCoursesCount ;
+        //   state.message = "all course fetdched successully"
+        // })
+        // .addCase(getAllCoursesFrontend.rejected, (state, action:any) => {
+        //   console.log("action==",action);
+        //   state.loading = false;
+        //   state.error = action.error.message || 'Something went wrong';
+        //   state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+        // })  
+     
+        
+
+
         
 
 

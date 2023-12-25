@@ -41,6 +41,32 @@ export const getAllCoursesFrontend = createAsyncThunk(  "courses/getAllCoursesFr
 
 
 
+  export const getAllCoursesTotal = createAsyncThunk(  "courses/getAllCoursesTotal",  async (_, thunkApi) => {
+    try {
+     
+
+      const { data } = await axios.get(   `${server}/api/v1/allcoursesTotal`,{
+          headers:{
+            // 'Access-Control-Allow-Origin': '*', 
+            'Content-type': 'application/json',
+            
+        },
+         withCredentials:true,
+      
+      });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
 
 
 
@@ -56,6 +82,7 @@ export const getAllCoursesFrontend = createAsyncThunk(  "courses/getAllCoursesFr
     error: string | null;
     message:string |null
     filteredCoursesCount:number
+    allCourses:CousseModelTypeFrontend[] | null;
  
   }
   const initialState: initalStateForAllcourses = {
@@ -63,7 +90,8 @@ export const getAllCoursesFrontend = createAsyncThunk(  "courses/getAllCoursesFr
     loading: false,
     error: null,
     message:null,
-    filteredCoursesCount:0
+    filteredCoursesCount:0,
+    allCourses:null,
   };
   
 
@@ -106,9 +134,30 @@ export const getAllCourses = createSlice({
         })  
      
         
+        .addCase(getAllCoursesTotal.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(getAllCoursesTotal.fulfilled, (state, action:any) => {
+          state.loading = false;
+          state.allCourses = action.payload.allCourses ;
+          // state.filteredCoursesCount = action.payload.filteredCoursesCount ;
 
+          state.message = null
+        })
+        .addCase(getAllCoursesTotal.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+        })  
+     
         
       
+        
+
+
         
 
 

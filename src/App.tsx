@@ -18,6 +18,8 @@ import { AppDispatch, RootState } from './components/Redux/store';
 import ProtectedRoute from './components/ProtectedRoute.tsx/ProtectedRoute';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import MyAccount from './components/MyAccount/MyAccount';
+import AllCourseList from './components/AllCourseList/AllCourseList';
+import EditCourse from './components/EditCourse/EditCourse';
 // import { Loading } from './components/Loading/Loading';
 
 
@@ -67,7 +69,7 @@ useEffect(() => {
     
    }, [loading])
 
- console.log("logged in user in state app", logedInUser);
+//  console.log("logged in user in state app", logedInUser);
    
   return (
      
@@ -81,7 +83,11 @@ useEffect(() => {
           <Routes>
               <Route path='/' element={<Home/>} />
               <Route path='/login' element={<Login/>} />
-              <Route path='/course/:courseId' element={<CourseDescription/>} />
+              {/* <Route path='/course/:courseId' element={<CourseDescription/>} /> */}
+              <Route path="/course" element={<ProtectedRoute  user = {logedInUser} isAdmin={false}/>} >
+              
+              <Route path=':courseId' element={<CourseDescription />} />
+         </Route>
 
               
               {/* <Route path='/loading' element={<Loading/>} /> */}
@@ -100,9 +106,13 @@ useEffect(() => {
               </Route>
 
 
-              <Route path="/course" element={<ProtectedRoute  user = {logedInUser} isAdmin={false}/>} >
+              <Route path="/course" element={<ProtectedRoute  user = {logedInUser} isAdmin={true}/>} >
               
+              <Route path='AllCourseList' element={<AllCourseList/>} />
+
               <Route path='createcourse' element={<CreateCourse/>} />
+              <Route path='edit/:courseId' element={<EditCourse/>} />
+
          </Route>
 
               <Route path="*" element={<PageNotFound />} />

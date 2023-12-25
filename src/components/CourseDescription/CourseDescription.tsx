@@ -36,9 +36,19 @@ const CourseDescription = () => {
   
     
   useEffect(() => {
-    toast.error(error)
-    toast.warning(message)
-      }, [error])
+    if(error){
+      toast.error(error)
+      
+    }
+
+    if(message){
+      toast.warning(message)
+    }
+
+ 
+
+    
+      }, [error, message])
 
 
     useEffect(() => {
@@ -49,6 +59,9 @@ const CourseDescription = () => {
     }, [loading])
 //     console.log({course});
 // console.log({lecturesState});
+// useEffect(() => {
+
+// }, [message, error])
 
 
   return (
