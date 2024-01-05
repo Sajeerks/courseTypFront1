@@ -20,6 +20,9 @@ import CreateCourse from './components/CreateCourse/CreateCourse';
 import MyAccount from './components/MyAccount/MyAccount';
 import AllCourseList from './components/AllCourseList/AllCourseList';
 import EditCourse from './components/EditCourse/EditCourse';
+import UserList from './components/UserList/UserList';
+import EditUser from './components/EditUser/EditUser';
+import Register from './components/Register/Register';
 // import { Loading } from './components/Loading/Loading';
 
 
@@ -40,13 +43,19 @@ interface userForPassing{
   user:userTypeInFrontEnd
 }
  
+
+export let setProgesserVaiblae:React.Dispatch<React.SetStateAction<number>>
+export let progressUploadedorExport :number
 const App = () => {
   
   const dispatch = useDispatch<AppDispatch>()
   const {user,loading, error} = useSelector((state:RootState)=>state.user)
   const [darkThemer, setdarkTheme] = useState(false)
   const [logedInUser, setlogedInUser] = useState<userTypeInFrontEnd |  null>(null)
+  const [progessuploaded, setprogessuploaded] = useState(0)
 
+  setProgesserVaiblae = setprogessuploaded
+  progressUploadedorExport = progessuploaded
 //   const getLoggedInUserFunc =async()=>{
 //     dispatch (getLoggedInUserDetailsFrontend())
 // }
@@ -95,6 +104,9 @@ useEffect(() => {
        
               <Route path='/paymentFailed' element={<PaymentFail/>} />
               <Route path='/PaymentSuccess' element={<PaymentSuccess/>} />
+
+              <Route path='/register' element={<Register/>} />
+
               <Route path="/account" element={<ProtectedRoute  user = {logedInUser} isAdmin={false}/>} >
               
                    <Route index element={<MyAccount user={logedInUser}/>} />
@@ -112,6 +124,13 @@ useEffect(() => {
 
               <Route path='createcourse' element={<CreateCourse/>} />
               <Route path='edit/:courseId' element={<EditCourse/>} />
+              <Route path='userlist' element={<UserList/>} />
+              <Route path='user/edit/:id' element={<EditUser/>} />
+
+
+             
+
+              userlist
 
          </Route>
 

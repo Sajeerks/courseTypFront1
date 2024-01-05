@@ -1,0 +1,9 @@
+.Register_main_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+

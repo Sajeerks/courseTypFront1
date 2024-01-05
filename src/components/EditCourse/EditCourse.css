@@ -4,5 +4,54 @@
     align-items: center;
     flex-direction: column;
     min-height: 80vh;
-    width: 100vw;
+    max-width: 100vw;
+}
+
+.lectureCard_in_edit_course{
+    width: 50vw;
+    height: auto;
+    background: rgb(227, 214, 214);
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin: 5vmax;
+
+
+}
+
+
+.video_Preveiw_in_modal{
+    width: 50vw;
+}
+
+.video_in_course_description_edit_course{
+    width: 50vw;
+}
+
+
+@media screen and (max-width:600px){
+    .lectureCard_in_edit_course{
+        width: 90vw;
+        height: auto;
+        background: rgb(227, 214, 214);
+        display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       margin: 5vmax;
+    
+    
+    }
+    
+    
+    
+.video_Preveiw_in_modal{
+    width: 90vw;
+}
+
+
+    .video_in_course_description_edit_course{
+        width: 90vw;
+    }
 }

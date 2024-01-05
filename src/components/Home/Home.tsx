@@ -9,6 +9,7 @@ import { Fragment, useEffect, useState } from "react";
 import { getAllCoursesFrontend } from "../Redux/courseReducer";
 import ReactPaginate from 'react-paginate';
 import { Loading } from "../Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const StyledBox = styled(Box)({
 
@@ -85,6 +86,8 @@ useEffect(() => {
  <Fragment>
     {loading ?(<Loading/>):(  
     <StyledBoxForWholePage >
+       <Helmet><title> course bundler home</title></Helmet>
+
         <Typography variant="h5" sx={{marginTop:"21max"}}>COURSE BUNDLER</Typography>
       <Box>
     {(allCourseState && allCourseState.length>0 )&& allCourseState?.map((course, index)=>{

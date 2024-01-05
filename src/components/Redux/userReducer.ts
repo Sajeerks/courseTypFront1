@@ -2,7 +2,7 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { server } from "../../App";
+import { server, setProgesserVaiblae } from "../../App";
 import axios from 'axios'
 import { RootState } from './store';
 
@@ -133,7 +133,6 @@ export const chagePasswordFrontend = createAsyncThunk(  "user/chagePasswordFront
 
 
 
-
 export const changeUserDetailsFrontend = createAsyncThunk(  "user/changeUserDetailsFrontend",  async (myForm:FormData, thunkApi) => {
   try {
     for (var pair of myForm.entries()) {
@@ -161,8 +160,110 @@ export const changeUserDetailsFrontend = createAsyncThunk(  "user/changeUserDeta
   }
 }
 );
+// /admin/updateprofile/:id
+
+interface changeUserDetailsFrontendBYADminType{
+  myForm:FormData
+  id:string
+}
 
 
+export const changeUserDetailsFrontendBYADmin = createAsyncThunk(  "user/changeUserDetailsFrontendBYADmin",  async ({myForm, id}:changeUserDetailsFrontendBYADminType, thunkApi) => {
+  try {
+    for (var pair of myForm.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
+
+    const { data } = await axios.put(   `${server}/api/v1/admin/updateprofile/${id}`,myForm,{
+        headers:{
+          // 'Access-Control-Allow-Origin': '*', 
+          // 'Content-type': 'application/json',
+          'Content-type': "multipart/form-data",
+          
+      },
+      onUploadProgress:function(progressEvent) {
+        var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total! );
+        // console.log({percentCompleted});
+        setProgesserVaiblae(percentCompleted)
+      },
+       withCredentials:true,
+    
+    });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+    return data;
+  } catch (error:any) {
+    // return error as Error
+    console.log(error)
+
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+}
+);
+
+
+
+export const registeruserFrontEnd = createAsyncThunk(  "user/registeruserFrontEnd",  async (myForm:FormData, thunkApi) => {
+  try {
+    for (var pair of myForm.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
+
+    const { data } = await axios.post(   `${server}/api/v1/register`,myForm,{
+        headers:{
+          // 'Access-Control-Allow-Origin': '*', 
+          // 'Content-type': 'application/json',
+          'Content-type': "multipart/form-data",
+          
+      },
+      onUploadProgress:function(progressEvent) {
+        var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total! );
+        // console.log({percentCompleted});
+        setProgesserVaiblae(percentCompleted)
+      },
+       withCredentials:true,
+    
+    });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+    return data;
+  } catch (error:any) {
+    // return error as Error
+    console.log(error)
+
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+}
+);
+
+
+
+
+
+export const getUserDetiailsFrontendWithIDAdmin = createAsyncThunk(  "user/getUserDetiailsFrontendWithIDAdmin",  async (id:string, thunkApi) => {
+  try {
+   
+
+    const { data } = await axios.get(   `${server}/api/v1/admin/user/${id}`,{
+        headers:{
+          // 'Access-Control-Allow-Origin': '*', 
+          'Content-type': 'application/json',
+          
+      },
+       withCredentials:true,
+    
+    });
+//  console.log( "data.user==",data.user)
+// console.log("data",data);
+    return data;
+  } catch (error:any) {
+    // return error as Error
+    console.log(error)
+
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+}
+);
 
 
 
@@ -189,12 +290,14 @@ export const changeUserDetailsFrontend = createAsyncThunk(  "user/changeUserDeta
     loading: boolean;
     error: string | null;
     message:string |null
+    userForEditing:userTypeInFrontEnd | null;
   }
   const initialState: intitStateForUser = {
     user: null,
     loading: false,
     error: null,
-    message:null
+    message:null,
+    userForEditing:null
   };
   
 
@@ -309,10 +412,89 @@ export const getUserSlice = createSlice({
        
         
         
-                
+        
+
+
+        .addCase(getUserDetiailsFrontendWithIDAdmin.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+          state.userForEditing =  null 
+        })
+        .addCase(getUserDetiailsFrontendWithIDAdmin.fulfilled, (state, action:any) => {
+          state.loading = false;
+          // state.user = action.payload.user ;
+          state.message =action.payload.message  || "user fetched successfully"
+          state.userForEditing =  action.payload.user ;
+
+        })
+        .addCase(getUserDetiailsFrontendWithIDAdmin.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+          state.userForEditing =  null 
+
+        })  
+       
+        
+   
+        
+
+        .addCase(changeUserDetailsFrontendBYADmin.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+          state.userForEditing =  null 
+        })
+        .addCase(changeUserDetailsFrontendBYADmin.fulfilled, (state, action:any) => {
+          state.loading = false;
+          // state.user = action.payload.user ;
+          state.message =action.payload.message  || "user updated successfully"
+          state.userForEditing =  action.payload.user ;
+
+        })
+        .addCase(changeUserDetailsFrontendBYADmin.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+          state.userForEditing =  null 
+
+        })  
 
         
 
+        
+
+
+         
+
+        .addCase(registeruserFrontEnd.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+          state.userForEditing =  null 
+          state.user = null 
+        })
+        .addCase(registeruserFrontEnd.fulfilled, (state, action:any) => {
+          state.loading = false;
+          // state.user = action.payload.user ;
+          state.message =action.payload.message  || "user updated successfully"
+          state.user =  action.payload.user ;
+
+        })
+        .addCase(registeruserFrontEnd.rejected, (state, action:any) => {
+          console.log("action==",action);
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || "login failed" 
+          state.userForEditing =  null 
+          state.user = null 
+
+        })  
+
+        
 
 
         

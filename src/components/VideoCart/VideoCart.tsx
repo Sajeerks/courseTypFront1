@@ -60,7 +60,7 @@ const VideoCart = ({ course }: PropTypeVideoCard) => {
       <div className="videoCart_details">
         <h2 className="course_title">{course.title}</h2>
 
-        <p className="video_description">{course.description}</p>
+        <div dangerouslySetInnerHTML={{__html:course.description}} className="video_description"></div>
 
         <p>No of videos {course.numOfVideos}</p>
       </div>

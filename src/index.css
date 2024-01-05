@@ -1,10 +1,17 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Ubuntu+Mono&display=swap'); */
+
+html{
+  overflow-x: hidden;
+
+  max-width: 100vw;
+  
+}
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
   
 }
 
@@ -18,7 +25,7 @@
 body{
   overflow-x: hidden;
 
-  max-width: 100%;
+  max-width: 100vw;
   
 }
 a {

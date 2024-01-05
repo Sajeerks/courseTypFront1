@@ -54,7 +54,7 @@ export default function TemporaryDrawer({openDrawer,setopenDrawer}:TemporaryDraw
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['course/createcourse', 'course/AllCourseList', 'allUsersList', 'allProducts'].map((text, index) => (
+        {['course/createcourse', 'course/AllCourseList', 'course/userlist', 'allProducts'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={()=>navigate(`/${text}`)}>
               {/* <Link to={`/product/${text}`}  > */}

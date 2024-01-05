@@ -150,7 +150,7 @@ React.useEffect(() => {
       onClose={handleMenuClose}
     >
     {user?.name?<MenuItem onClick={handelLogout}>Logout </MenuItem>:<MenuItem onClick={handleLoginClick}>Login </MenuItem>}  
-      <MenuItem onClick={handleMyaccountClicked}>My account</MenuItem>
+{user?.name? <MenuItem onClick={handleMyaccountClicked}>My account</MenuItem>:<MenuItem onClick={()=>{navigate("/register")}}>Register</MenuItem> }     
     </Menu>
   );
 

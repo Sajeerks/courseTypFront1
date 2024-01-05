@@ -20,31 +20,30 @@ import { createNewCourseFrontend } from "../Redux/singleCourseReducer";
 
 function checkforSIzeOfFiels(file:any) {
   let valid = true;
-  // console.log("fieks----", file);
-  // if (files) {
-  // files.map(file => {
-  // console.log("size of the file checkforSIzeOfFiels ", file.size)
-  // const size = file.size / 1024 / 1024;
-  // if (size > 1) {
-  //   valid = false;
-  // }
 
-  // })
-  // }
-  if( new Blob([file]).size <= 1024*1027/1000000){
+  if( new Blob([file]).size >= 1000000){
+
     valid = false
    }
    return valid;
   
+  
 }
 function checkIfFilesAreCorrectType(file:any) {
-  // console.log(file);
+  const validFileExtensions = { image: ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'], 
+  video:["mp4", "avi",  "wmv" , "flv" ] };
   let valid = true;
 
     // if (!["application/pdf", "image/jpeg", "image/png"].includes(file.type)) {
+//       console.log("valid din check file typeeeeeeeeee");
+//  console.log("file insise the checkfilesareCorrect type " , file);
+//  console.log("file.name " , file.name);
 
-  if (["application/pdf", "image/jpeg", "image/png"].includes(file)) {
-    console.log("valid din check file size");
+   
+  // if (!["application/pdf", "image/jpeg", "image/png"].includes(file.name)) {
+  if (!validFileExtensions["image"].includes(file.name.split('.').pop())) {
+
+    // console.log("valid din check file typeeeeeeeeee");
     valid = false;
   }
 
@@ -55,8 +54,10 @@ function checkIfFilesAreCorrectType(file:any) {
 const validationSchema = yup.object({
   title: yup.string()
   .required("please enter a product name")
-  .min(2, "titke too short"),
+  .min(5, "title too short")
+  .max(10, "title too long"),
 description: yup.string().required("please enter a product description")
+.min(10, "description too short")
 .max(80, "description too long"),
 // price: yup.number()
 //   .integer()
@@ -95,7 +96,8 @@ description: yup.string().required("please enter a product description")
      
     // )
 
-    images: yup.array().of(
+    file:
+    //  yup.array().of(
       // Yup.string().required("must be a type of string of base64 URL")
       yup.mixed()
         .required("A file is required")
@@ -111,7 +113,7 @@ description: yup.string().required("please enter a product description")
           "VALIDATION_FIELD_FILE_WRONG_TYPE",
           checkIfFilesAreCorrectType
         )
-    ),
+    // ),
 
 
 });
@@ -238,7 +240,7 @@ return errors
     
      myForm.append("category", values.category);
      myForm.append("description", values.description);
-     myForm.append("file", image!);
+     myForm.append("file", values.file);
      myForm.append("createdBy",values.createdBy!)
 
  
@@ -313,6 +315,7 @@ console.log("imageprev--", imageprev);
     reader.onloadend = () => {
       setimageprev(reader.result as string);
       setimage(file);
+      formik.setFieldValue("file", file)
     };
 
 
@@ -373,10 +376,10 @@ console.log("imageprev--", imageprev);
     // };
 
     // reader.readAsDataURL(file);
-  formik.values.file =  masterFileArray[0]
-setTimeout(() => {
- formik.setFieldTouched("file")
-}, 500);
+  // formik.values.file =  masterFileArray[0]
+// setTimeout(() => {
+//  formik.setFieldTouched("file")
+// }, 500);
   
 
   };
@@ -547,7 +550,7 @@ apiKey='0oc6cviwzuenmvc7cenc4jun2n8rjrkqpqyc6yudnkuim9zc'
   
   >
       Upload file 
-      <VisuallyHiddenInput type="file"    multiple  accept='/image*' onChange={handleFileUpload}/>
+      <VisuallyHiddenInput type="file"    multiple  accept="image/*" onChange={handleFileUpload}/>
     </Button>
 
     {formik.errors.file && <Typography color={themer.palette.error.main} variant='h5'>{formik.errors.file}</Typography>}

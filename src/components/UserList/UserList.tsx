@@ -1,14 +1,13 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
-import "./AllCourseList.css"
 import { useDispatch, useSelector } from "react-redux"
+import "./UserList.css"
 import { AppDispatch, RootState } from "../Redux/store"
-import React, { Fragment, useEffect, useState } from "react"
-import {  getAllCoursesTotal } from "../Redux/courseReducer"
-import { toast } from "react-toastify"
+import { Fragment, useEffect, useMemo, useState } from "react"
+import { getAllUsersFrontEnd } from "../Redux/usersReducer"
+import { userTypeInFrontEnd } from "../Redux/userReducer"
 import { Loading } from "../Loading/Loading"
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-
+import { LoadingWithPercentage } from "../Loading/LoadingWithPercentage"
+import { progressUploadedorExport } from "../../App"
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import {
   Column,
   Table,
@@ -32,34 +31,33 @@ import {
   // ColumnResizeMode,
  
 } from '@tanstack/react-table'
-import { CousseModelTypeFrontend } from "../VideoCart/VideoCart"
 import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet-async"
-import { deleteEntireCourseFrontend } from "../Redux/singleCourseReducer"
-  
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import moment from "moment"
 
-const AllCourseList = () => {
 
-
+const UserList = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const {allCourses, loading, error, message} = useSelector((state:RootState)=>state.courses)
-   const {loading:sinlecourseLoading, error:singlecourseError, message:singlecourseMessage,
+  const {loading:allUsersLoading, message:allUsersMessage,
+   error:allUSersMessage,users
+  } = useSelector((state:RootState)=>state.users)
+  const [allusersFetched, setallusersFetched] = useState<userTypeInFrontEnd[] | null>(null)
+
+
   
- course } = useSelector((state:RootState)=>state.singleCourse)
-
-
-
-
-  const [tableData, setdataTable] = useState<CousseModelTypeFrontend[]>([])
+  const [tableData, setdataTable] = useState<userTypeInFrontEnd[]>([])
 
   const [columFilter22, setcolumFilter22] = useState<ColumnFiltersState>([])
   const [sortingTable, setsortingTable] = useState<any[]>([])
 
 
 
-  const columns = [   {
+  const columns = [
+       {
     accessorKey:"_id",
-    header:"course identiier",
+    header:"user ID",
     size:225,
     cell:(props:any)=>{
 
@@ -75,20 +73,9 @@ const AllCourseList = () => {
       return (
         <Box>
      
-    <Link to={`/course/edit/${props.row.original._id}`}>   <Button sx={{m:1, height:"30px",  fontSize:"10px", }}   variant="contained">update Course</Button></Link>  
+    <Link to={`/course/user/edit/${props.row.original._id}`}>   <Button sx={{m:1, height:"30px",  fontSize:"10px", }}   variant="contained">update user</Button></Link>  
 
-   <Button sx={{m:1, height:"30px", fontSize:"10px" , bgcolor:"red"}}  onClick={()=>{
-  if( window.confirm(`Do you want to delete this course\n
-     and it contents wih id ${props.row.original._id} `)=== true ){
-      dispatch(deleteEntireCourseFrontend(props.row.original._id))
-
-     }
-    
-  
-  }} 
-    
-    
-    variant="contained">delete Course</Button>
+   <Button sx={{m:1, height:"30px", fontSize:"10px" , bgcolor:"red"}} variant="contained">delete user</Button>
 
 
  
@@ -102,38 +89,37 @@ const AllCourseList = () => {
     enableColumnFilter:false
   },
   {
-    accessorKey:"title",
-    header:"course title",
+    accessorKey:"name",
+    header:"user name",
     cell: (props:any)=><p>{props.getValue()}</p>
   },
   {
-    accessorKey:"description",
-    header:"course description",
-    cell:(props:any)=><div   dangerouslySetInnerHTML={{__html: props.getValue()}}>{}</div>
+    accessorKey:"email",
+    header:"user email",
+    size:225,
+    cell: (props:any)=><p>{props.getValue()}</p>
   },
   
   {
-    accessorKey:"numOfVideos",
-    header:"course numOfVideos",
+    accessorKey:"role",
+    header:"user role",
     cell:(props:any)=><p>{props.getValue()}</p>
   },
   {
-    accessorKey:"category",
-    header:"course category",
-    cell:(props:any)=><p>{props.getValue()}</p>
+    accessorKey:"createdAt",
+    header:"user created at",
+    cell:(props:any)=><p>{ moment(props.getValue().split("T")[0]).format("DD-MMM-YY")}</p>
   },
   {
-    accessorKey:"poster",
-    header:"course poster",
+    accessorKey:"avatar",
+    header:"user image",
     cell:(props:any)=><img src={props.getValue().url} style={{width:"50px", }}/>,
     enableColumnFilter:false
   },
-  
+
 
 ]
   
-
-
 
   const table = useReactTable({
     data:tableData,
@@ -167,75 +153,38 @@ const AllCourseList = () => {
   
   
   })
-  
 
-
-
-
-
-
-
-
+    
   useEffect(() => {
-  dispatch(getAllCoursesTotal())
- 
-
+ dispatch(getAllUsersFrontEnd())
   }, [])
-  useEffect(() => {
-  // if(allCourses){
-  //   console.log({allCourses});
-    setdataTable(allCourses!)
-  // }
-  }, [loading])
-  
-  useEffect(() => {
-    if(message){
-      toast.warning(message)
-    
- 
-    }
-    if(error){
-      toast.error(error)
-    }
-    
-  }, [message, error])
-  
-  useEffect(() => {
-    if(singlecourseMessage){
-      toast.warning(singlecourseMessage)
-    
- 
-    }
-    if(singlecourseError){
-      toast.error(singlecourseError)
-    }
-    
-  }, [singlecourseMessage, singlecourseError])
 
   useEffect(() => {
-   
-    dispatch(getAllCoursesTotal())
-  }, [sinlecourseLoading])
-  
+    setallusersFetched(users)
+    if(users){
+      setdataTable(users)
+
+    }
+  }, [allUsersLoading])
   
 
-  
+  console.log({allusersFetched});
+  console.log({progressUploadedorExport});
   return (
-<Fragment> 
+    <Fragment>
+      {allUsersLoading?(<LoadingWithPercentage progessuploaded={0} />):(
+      <div className="userlist_main_div">
+  
+   
+   <Helmet><title> user list</title></Helmet>
 
-{(loading ||sinlecourseLoading) ?(<Loading/>):(     
-
-
-<div className="allcourse_list_main_div">
-<Helmet><title> course list</title></Helmet>
-
-<Typography variant="h5">All Course List </Typography>
+<Typography variant="h5">All user List </Typography>
 
 {(tableData &&  tableData?.length>1 )?  (
 
 
 
-
+<div>      
 
 
 <table className="table"  style={{width:table.getTotalSize(),justifyContent:"flex-start"}}>
@@ -328,7 +277,7 @@ const AllCourseList = () => {
   </tbody>
 </table>
 
-
+</div>
 
 
 
@@ -407,28 +356,22 @@ return(
   </div>
   </div>
 
-  
-
-</div>
- )}
-
-</Fragment>
-
-    )
-    
-    
- 
    
+   
+   
+   
+   
+   
+   
+   
+
+      </div>
+      )}
+    </Fragment>
+  )
 }
 
-export default AllCourseList
-
-
-
-
-
-
-
+export default UserList
 
 
 
@@ -447,7 +390,7 @@ function Filter({
 
   const columnFilterValue = column.getFilterValue()
 
-  const sortedUniqueValues = React.useMemo(
+  const sortedUniqueValues = useMemo(
     () =>
       typeof firstValue === 'number'
         ? []
@@ -525,13 +468,13 @@ function DebouncedInput({
   onChange: (value: string | number) => void
   debounce?: number
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-  const [value, setValue] = React.useState(initialValue)
+  const [value, setValue] = useState(initialValue)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValue(initialValue)
   }, [initialValue])
 
-  React.useEffect(() => {
+ useEffect(() => {
     const timeout = setTimeout(() => {
       onChange(value)
     }, debounce)

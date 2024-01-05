@@ -45,10 +45,10 @@ const loginSubmitHandler =(e:React.FormEvent)=>{
 useEffect(() => {
   
  if(user?.name){
-  setTimeout(() => {
-    navigate("/")
-  }, 2000);
-
+  // setTimeout(() => {
+  //   navigate("/")
+  // }, 2000);
+  navigate("/")
  }
 
 
