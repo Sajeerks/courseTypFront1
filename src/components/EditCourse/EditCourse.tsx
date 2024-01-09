@@ -96,7 +96,7 @@ function checkforSIzeOfFiels(file: any) {
   // console.log("new Blob([file]).size ===",new Blob([file]).size );
 
   // if( new Blob([file]).size <= (1024*1027/100000000000)){
-  if (new Blob([file]).size >= 10000000) {
+  if (new Blob([file]).size >= 100000000) {
     valid = false;
   }
   return valid;
