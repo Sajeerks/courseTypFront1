@@ -9,19 +9,19 @@ import { Fragment, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../Redux/store"
 import { LoadingWithPercentage } from "../Loading/LoadingWithPercentage"
-import { Loading } from "../Loading/Loading"
+// import { Loading } from "../Loading/Loading"
 import { toast } from "react-toastify"
 
 import { Box,Button,TextField,Typography,styled, useTheme } from "@mui/material"
 import { Helmet } from "react-helmet-async"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Resizer from "react-image-file-resizer";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
+// import Resizer from "react-image-file-resizer";
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import dayjs, { Dayjs } from 'dayjs';
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useNavigate } from "react-router-dom"
@@ -43,21 +43,21 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 
-const resizeFile = (file:File) =>
-  new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      300,
-      300,
-      "JPEG",
-      100,
-      0,
-      (uri) => {
-        resolve(uri);
-      },
-      "base64"
-    );
-  });
+// const resizeFile = (file:File) =>
+//   new Promise((resolve) => {
+//     Resizer.imageFileResizer(
+//       file,
+//       300,
+//       300,
+//       "JPEG",
+//       100,
+//       0,
+//       (uri) => {
+//         resolve(uri);
+//       },
+//       "base64"
+//     );
+//   });
 
   function checkforSIzeOfFielsForImages(file:any) {
     let valid = true;

@@ -1,7 +1,7 @@
-import { Box, Container, Typography } from "@mui/material"
+import { Box,  Typography } from "@mui/material"
 import "./Home.css"
 import { styled } from '@mui/material/styles';
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/store";
 import VideoCart, { CousseModelTypeFrontend } from "../VideoCart/VideoCart";
@@ -11,21 +11,21 @@ import ReactPaginate from 'react-paginate';
 import { Loading } from "../Loading/Loading";
 import { Helmet } from "react-helmet-async";
 
-const StyledBox = styled(Box)({
+// const StyledBox = styled(Box)({
 
-    backgroundColor: 'aliceblue',
-    color: 'darkslategray',
-    padding: '2rem',
-    textAlign:'center',
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"center",
-    alignContent:"center",
-    width:"100vw",
-    height:'85vh'
+//     backgroundColor: 'aliceblue',
+//     color: 'darkslategray',
+//     padding: '2rem',
+//     textAlign:'center',
+//     display:"flex",
+//     flexDirection:"column",
+//     justifyContent:"center",
+//     alignContent:"center",
+//     width:"100vw",
+//     height:'85vh'
 
   
-  })
+//   })
 
   export const StyledBoxForWholePage = styled(Box)(({ theme }) => ({
     color: theme.palette.primary.main,
@@ -48,7 +48,7 @@ const Home = () => {
 
    const [allCourseState, setallCourseState] = useState< CousseModelTypeFrontend[]| null>(null)
    
-  const {loading, courses, error, message , filteredCoursesCount} = useSelector((state:RootState)=>state.courses)
+  const {loading, courses , filteredCoursesCount} = useSelector((state:RootState)=>state.courses)
 
   const [pageNumber, setpageNumber] = useState(0)
 

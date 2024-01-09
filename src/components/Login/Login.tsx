@@ -16,7 +16,7 @@ const Login = () => {
   const theme = useTheme()
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
-  const{loading, error,message, user} = useSelector((state:RootState)=>state.user)
+  const{ user} = useSelector((state:RootState)=>state.user)
  
   const [loginDetails, setloginDetails] = useState({
     email:"sajeersayed@gmail.com",

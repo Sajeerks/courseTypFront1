@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { server } from "../../App";
 import axios from 'axios'
-import { RootState } from './store';
+// import { RootState } from './store';
 import { CousseModelTypeFrontend } from '../VideoCart/VideoCart';
 
 

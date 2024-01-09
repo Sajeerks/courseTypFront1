@@ -12,7 +12,7 @@ import CourseDescription from './components/CourseDescription/CourseDescription'
 import Subscribe from './components/Payments/Subscribe';
 import PaymentFail from './components/Payments/PaymentFail';
 import PaymentSuccess from './components/Payments/PaymentSuccess';
-import { getLoggedInUserDetailsFrontend, loginUser, userTypeInFrontEnd } from './components/Redux/userReducer';
+import { getLoggedInUserDetailsFrontend, userTypeInFrontEnd } from './components/Redux/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './components/Redux/store';
 import ProtectedRoute from './components/ProtectedRoute.tsx/ProtectedRoute';
@@ -42,9 +42,9 @@ const lightTheme = createTheme({
 });
 export const server = "https://coursety1-81e01721fa5b.herokuapp.com"
 
-interface userForPassing{
-  user:userTypeInFrontEnd
-}
+// interface userForPassing{
+//   user:userTypeInFrontEnd
+// }
  
 
 export let setProgesserVaiblae:React.Dispatch<React.SetStateAction<number>>
@@ -52,7 +52,7 @@ export let progressUploadedorExport :number
 const App = () => {
   
   const dispatch = useDispatch<AppDispatch>()
-  const {user,loading, error} = useSelector((state:RootState)=>state.user)
+  const {user,loading} = useSelector((state:RootState)=>state.user)
   const [darkThemer, setdarkTheme] = useState(false)
   const [logedInUser, setlogedInUser] = useState<userTypeInFrontEnd |  null>(null)
   const [progessuploaded, setprogessuploaded] = useState(0)

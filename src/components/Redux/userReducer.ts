@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { server, setProgesserVaiblae } from "../../App";
 import axios from 'axios'
-import { RootState } from './store';
+// import { RootState } from './store';
 
 
 
@@ -341,7 +341,7 @@ export const getUserSlice = createSlice({
           state.error = null;
           state.message = null
         })
-        .addCase(logoutUser.fulfilled, (state, action:any) => {
+        .addCase(logoutUser.fulfilled, (state, _action:any) => {
           state.loading = false;
           state.user = null ;
           state.message = "logout successfull"

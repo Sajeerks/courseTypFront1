@@ -101,15 +101,15 @@ export const getContactRequsetFrontend = createAsyncThunk(
 
 
 
-interface PaymentType {
-  razorpay_signature: String;
+// interface PaymentType {
+//   razorpay_signature: String;
 
-  razorpay_payment_id: String;
+//   razorpay_payment_id: String;
 
-  razorpay_subscription_id: String;
+//   razorpay_subscription_id: String;
 
-  createdAt: Date;
-}
+//   createdAt: Date;
+// }
 
 export interface StatsModelTypeFronend {
   users: number;

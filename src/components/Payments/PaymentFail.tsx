@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { StyledBoxForWholePage } from "../Home/Home"
 import { Link } from "react-router-dom"
 

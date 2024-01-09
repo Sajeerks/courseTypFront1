@@ -1,4 +1,4 @@
-import { Box, FormHelperText, TextField, styled, FormControl, FormLabel , MenuItem, Menu
+import { Box, FormHelperText, TextField, styled, FormControl ,MenuItem
 
 ,  Select, InputLabel, useTheme, Button, Typography, Paper
 } from "@mui/material"
@@ -173,7 +173,7 @@ const dispatch = useDispatch<AppDispatch>()
 const [imageprev, setimageprev] = useState("")
 const [image, setimage] = useState<File | null>(null)
 
-const {loading, error, message, course} = useSelector((state:RootState)=>state.singleCourse)
+const {loading, error, message} = useSelector((state:RootState)=>state.singleCourse)
   useEffect(() => {
   if(error){
     toast.error(error)
@@ -485,7 +485,7 @@ apiKey='0oc6cviwzuenmvc7cenc4jun2n8rjrkqpqyc6yudnkuim9zc'
            image_advtab: true
          }}
 
-         onEditorChange={(newValue, editor) => {
+         onEditorChange={(newValue, _editor) => {
          
           // setValue(newValue.replace(/<(.|\n)*?>/g, ''));
     

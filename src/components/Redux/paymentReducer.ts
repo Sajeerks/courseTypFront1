@@ -4,14 +4,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { server } from "../../App";
 import axios from 'axios'
-import { RootState } from './store';
-import { CousseModelTypeFrontend } from '../VideoCart/VideoCart';
+// import { RootState } from './store';
+// import { CousseModelTypeFrontend } from '../VideoCart/VideoCart';
 
 
 
-interface getSingleCourseFrontendType{
-    courseId:string
-}
+// interface getSingleCourseFrontendType{
+//     courseId:string
+// }
 export const buySubscriptionFrontend = createAsyncThunk(  "payment/buySubscriptionFrontend",  async (_, thunkApi) => {
       try {
        
@@ -66,18 +66,7 @@ export const buySubscriptionFrontend = createAsyncThunk(  "payment/buySubscripti
 
 
 
- interface PaymentType{
-    razorpay_signature:  String,
-
-    razorpay_payment_id:String
-
-    razorpay_subscription_id:  String,
-
-  
-    createdAt:  Date,
-
-   
-  }
+ 
   
 
 

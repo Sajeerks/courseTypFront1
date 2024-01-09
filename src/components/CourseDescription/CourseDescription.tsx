@@ -3,7 +3,7 @@ import "./CourseDescription.css"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../Redux/store"
 import { useEffect, useState } from "react"
-import { CousseModelTypeFrontend } from "../VideoCart/VideoCart"
+// import { CousseModelTypeFrontend } from "../VideoCart/VideoCart"
 import { OnlyLectureType, getSingleCourseFrontend } from "../Redux/singleCourseReducer"
 import { toast } from "react-toastify"
 import { Typography } from "@mui/material"
@@ -69,7 +69,7 @@ const CourseDescription = () => {
 
         <h3>Letures for the course -{courseId}</h3>
 
-        {( lecturesState && lecturesState?.length>=1 ) ? lecturesState.map((singleLecture, index)=>{
+        {( lecturesState && lecturesState?.length>=1 ) ? lecturesState.map((singleLecture, _index)=>{
             return (
                   <div key={singleLecture._id} className="lectureCard">
                     

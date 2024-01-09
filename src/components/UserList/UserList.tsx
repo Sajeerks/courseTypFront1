@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "../Redux/store"
 import { Fragment, useEffect, useMemo, useState } from "react"
 import { getAllUsersFrontEnd } from "../Redux/usersReducer"
 import { userTypeInFrontEnd } from "../Redux/userReducer"
-import { Loading } from "../Loading/Loading"
+// import { Loading } from "../Loading/Loading"
 import { LoadingWithPercentage } from "../Loading/LoadingWithPercentage"
 import { progressUploadedorExport } from "../../App"
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
@@ -40,8 +40,7 @@ import moment from "moment"
 
 const UserList = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const {loading:allUsersLoading, message:allUsersMessage,
-   error:allUSersMessage,users
+  const {loading:allUsersLoading,users
   } = useSelector((state:RootState)=>state.users)
   const [allusersFetched, setallusersFetched] = useState<userTypeInFrontEnd[] | null>(null)
 

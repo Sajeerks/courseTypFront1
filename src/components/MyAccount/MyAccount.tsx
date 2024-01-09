@@ -134,12 +134,12 @@ interface MyAccountProps{
 
 const MyAccount = ({user}:MyAccountProps) => {
    const dispatch = useDispatch<AppDispatch>()
-   const  {user:fetchedUser, loading, message, error} = useSelector((state:RootState)=>state.user)
+   const  { loading, message, error} = useSelector((state:RootState)=>state.user)
 
   const [changePasswordDiv, setchangePasswordDiv] = useState(false)
   const [changeuserDetailsDiv, setchangeuserDetailsDiv] = useState(false)
   const [imageprev, setimageprev] = useState("")
-const [image, setimage] = useState<File | null>(null)
+// const [image, setimage] = useState<File | null>(null)
 
     let rows:any[]= []
  if(user){
@@ -173,7 +173,7 @@ const themer = useTheme()
   validationSchema: validationSchema,
 
 
-validate:(values)=>{
+validate:(_values)=>{
 const errors:any ={}
 // if(values.description  && values.description.length> 80){
 // errors.description = "long description length"
@@ -217,7 +217,7 @@ const formik2 = useFormik({
   validationSchema: validationSchemaForUserDetails,
 
 
-validate:(values)=>{
+validate:(_values)=>{
 const errors:any ={}
 // if(values.description  && values.description.length> 80){
 // errors.description = "long description length"
@@ -273,7 +273,8 @@ const handleFileUpload =async(event:React.ChangeEvent<HTMLInputElement>)=>{
         console.log("readTHeImagFile");
         const reader = new FileReader()
         reader.onloadend = () => resolve(
-         [setimage(file as File),
+         [
+          // setimage(file as File),
           setimageprev(reader.result as string)
          ]
         )

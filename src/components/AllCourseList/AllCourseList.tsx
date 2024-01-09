@@ -43,9 +43,7 @@ const AllCourseList = () => {
 
   const dispatch = useDispatch<AppDispatch>()
   const {allCourses, loading, error, message} = useSelector((state:RootState)=>state.courses)
-   const {loading:sinlecourseLoading, error:singlecourseError, message:singlecourseMessage,
-  
- course } = useSelector((state:RootState)=>state.singleCourse)
+   const {loading:sinlecourseLoading, error:singlecourseError, message:singlecourseMessage, } = useSelector((state:RootState)=>state.singleCourse)
 
 
 

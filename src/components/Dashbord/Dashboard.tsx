@@ -38,32 +38,32 @@ ChartJS.register(
   Legend,
   ArcElement
 );
-const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+// const _data = {
+//   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//   datasets: [
+//     {
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2, 3],
+//       backgroundColor: [
+//         'rgba(255, 99, 132, 0.2)',
+//         'rgba(54, 162, 235, 0.2)',
+//         'rgba(255, 206, 86, 0.2)',
+//         'rgba(75, 192, 192, 0.2)',
+//         'rgba(153, 102, 255, 0.2)',
+//         'rgba(255, 159, 64, 0.2)',
+//       ],
+//       borderColor: [
+//         'rgba(255, 99, 132, 1)',
+//         'rgba(54, 162, 235, 1)',
+//         'rgba(255, 206, 86, 1)',
+//         'rgba(75, 192, 192, 1)',
+//         'rgba(153, 102, 255, 1)',
+//         'rgba(255, 159, 64, 1)',
+//       ],
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 
 
 
@@ -141,62 +141,62 @@ const Dashboard = () => {
 
 
 
-  function getLastYearMonths() {
-    const labels = [];
+//   function getLastYearMonths() {
+//     const labels = [];
   
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-  
-
+//     const months = [
+//       'January',
+//       'February',
+//       'March',
+//       'April',
+//       'May',
+//       'June',
+//       'July',
+//       'August',
+//       'September',
+//       'October',
+//       'November',
+//       'December',
+//     ];
   
 
-if(alldataState?.stats){
-  for (let i = 0; i < alldataState?.stats.length; i++) {
   
 
-    if(alldataState?.stats[i].createdAt){
-      labels.push(  months[new Date(alldataState?.stats[i]?.createdAt as Date).getMonth()]  )
+// if(alldataState?.stats){
+//   for (let i = 0; i < alldataState?.stats.length; i++) {
+  
 
-    }else{
+//     if(alldataState?.stats[i].createdAt){
+//       labels.push(  months[new Date(alldataState?.stats[i]?.createdAt as Date).getMonth()]  )
+
+//     }else{
           
-    }
+//     }
 
   
-   }
-}
+//    }
+// }
   
 
-    // const currentMonth = new Date().getMonth();
-    // console.log({currentMonth});
+//     // const currentMonth = new Date().getMonth();
+//     // console.log({currentMonth});
   
-    // const remain = 11 - currentMonth;
+//     // const remain = 11 - currentMonth;
   
-    // for (let i = currentMonth; i < months.length; i--) {
-    //   const element = months[i];
-    //   labels.unshift(element);
-    //   if (i === 0) break;
-    // }
+//     // for (let i = currentMonth; i < months.length; i--) {
+//     //   const element = months[i];
+//     //   labels.unshift(element);
+//     //   if (i === 0) break;
+//     // }
   
-    // for (let i = 11; i > remain; i--) {
-    //   if (i === currentMonth) break;
-    //   const element = months[i];
-    //   labels.unshift(element);
-    // }
+//     // for (let i = 11; i > remain; i--) {
+//     //   if (i === currentMonth) break;
+//     //   const element = months[i];
+//     //   labels.unshift(element);
+//     // }
   
-    return labels;
-  }
+//     return labels;
+//   }
   
 
 // console.log( "Sa" ,alldataState && alldataState?.stats.map(singleStat=>singleStat.views));
