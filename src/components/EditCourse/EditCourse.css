@@ -48,10 +48,12 @@
     
 .video_Preveiw_in_modal{
     width: 90vw;
+    max-height: 20vh;
 }
 
 
     .video_in_course_description_edit_course{
         width: 90vw;
+        max-height: 20vh;
     }
 }
