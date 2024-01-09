@@ -8,14 +8,14 @@ import axios from "axios"
 import { server } from "../../App"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
-import { userTypeInFrontEnd } from "../Redux/userReducer"
+// import { userTypeInFrontEnd } from "../Redux/userReducer"
 import logo from  "/src/tiger-29.png"
 
 
 const Subscribe = ( {user}:any) => {
   const dispatch = useDispatch<AppDispatch>()
 const [keyState, setkeyState] = useState("")
-  const {error, loading, paymentId} = useSelector((state:RootState)=>state.paymentReducer)
+  const {error, paymentId} = useSelector((state:RootState)=>state.paymentReducer)
   
 
 // (async () => {
