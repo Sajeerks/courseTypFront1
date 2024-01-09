@@ -39,7 +39,7 @@ const StyledBox = styled(Box)({
     justifyContent:"center",
     alignContent:"center",
     width:"100vw",
-    height:'90vh'
+    minHeight:'90vh'
   }));
   
 

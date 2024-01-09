@@ -4,6 +4,7 @@ import  getAllCourses from './courseReducer'
 import  singleCourse  from './singleCourseReducer'
 import paymentReducer from './paymentReducer'
 import getAllUsersSlice  from './usersReducer'
+import otherReducer from './otherReducer'
 
 
 
@@ -14,7 +15,8 @@ const store = configureStore({
      courses:getAllCourses,
      singleCourse:singleCourse,
      paymentReducer:paymentReducer,
-     users:getAllUsersSlice
+     users:getAllUsersSlice,
+     otherStats:otherReducer,
     }
 })
 

@@ -23,6 +23,9 @@ import EditCourse from './components/EditCourse/EditCourse';
 import UserList from './components/UserList/UserList';
 import EditUser from './components/EditUser/EditUser';
 import Register from './components/Register/Register';
+import Dashboard from './components/Dashbord/Dashboard';
+import Aboutus from './components/AboutUs/Aboutus';
+import Contact from './components/Contact/Contact';
 // import { Loading } from './components/Loading/Loading';
 
 
@@ -92,10 +95,14 @@ useEffect(() => {
           <Routes>
               <Route path='/' element={<Home/>} />
               <Route path='/login' element={<Login/>} />
+              <Route path='/aboutus' element={<Aboutus/>} />
+              <Route path='/contact' element={<Contact/>} />
+
               {/* <Route path='/course/:courseId' element={<CourseDescription/>} /> */}
               <Route path="/course" element={<ProtectedRoute  user = {logedInUser} isAdmin={false}/>} >
               
               <Route path=':courseId' element={<CourseDescription />} />
+             
          </Route>
 
               
@@ -119,7 +126,7 @@ useEffect(() => {
 
 
               <Route path="/course" element={<ProtectedRoute  user = {logedInUser} isAdmin={true}/>} >
-              
+              <Route path='dashboard' element={<Dashboard/>} />
               <Route path='AllCourseList' element={<AllCourseList/>} />
 
               <Route path='createcourse' element={<CreateCourse/>} />

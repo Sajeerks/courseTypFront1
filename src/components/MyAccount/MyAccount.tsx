@@ -366,7 +366,7 @@ useEffect(() => {
     </TableContainer>
 
 <div className="accountbuttons">
-  {user?.role==="admin" &&   <Button variant="contained">Change Role</Button>}
+  {/* {user?.role==="admin" &&   <Button variant="contained">Change Role</Button>} */}
   <Button onClick={changePasswordHandler}  sx={{mx:1}} variant="contained">Change Passwrord</Button>
   <Button   onClick={changeUserDetailsHandler} variant="contained">Change user Details</Button>
 </div> 
